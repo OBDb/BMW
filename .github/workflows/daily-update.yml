@@ -13,7 +13,7 @@ permissions:
 
 # Make prefixes for this repo
 env:
-  FILTER_ARGS: --filter-prefix=BMW- --filter-prefix=MINI- --filter-prefix=Rolls-Royce- --filter-prefix=Toyota-Supra
+  FILTER_ARGS: --filter-prefix=BMW- --filter-prefix=MINI- --filter-prefix=Rolls-Royce- --filter-prefix=Toyota-GR-Supra
   SIGNAL_PREFIX: BMW
 
 concurrency:
