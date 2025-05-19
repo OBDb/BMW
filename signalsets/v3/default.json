@@ -94,7 +94,8 @@
   ]},
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA23"}, "freq": 15,
   "signals": [
-    {"id": "BMW_ODO", "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "[EGS] mileage/odometer"}
+    {"id": "BMW_ODO_LOWRES", "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "Odometer, low resolution", "suggestedMetric": "odometer"},
+    {"id": "BMW_ODO",        "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "[EGS] mileage/odometer"}
   ]},
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA25"}, "freq": 30,
   "signals": [
@@ -111,7 +112,14 @@
   ]},
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA2E"}, "freq": 30,
   "signals": [
-    {"id": "BMW_GEAR", "path": "Engine", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Gear"}
+    {"id": "BMW_GEAR", "path": "Engine", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Gear"},
+    {"id": "BMW_GEAR_SHIFT", "path": "Transmission", "name": "Shift gear", "fmt": {"len": 8, "map": {
+          "0": { "description": "Park",    "value": "PARK" },
+          "1": { "description": "Reverse", "value": "REVERSE" },
+          "2": { "description": "Neutral", "value": "NEUTRAL" },
+          "3": { "description": "Drive",   "value": "DRIVE" }
+        }}
+    }
   ]},
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA37"}, "freq": 30,
   "signals": [
@@ -119,7 +127,7 @@
     {"id": "BMW_TIME_S", "path": "Engine", "fmt": {"bix": 8,  "len": 8, "max": 255, "unit": "scalar" }, "name": "Time in S"},
     {"id": "BMW_TIME_M", "path": "Engine", "fmt": {"bix": 16, "len": 8, "max": 255, "unit": "scalar" }, "name": "Time in M"}
   ]},
-{ "hdr": "6F1", "rax": "619", "eax": "19", "fcm1": true, "dbg": true, "cmd": {"22": "DB32"}, "freq": 1,
+{ "hdr": "6F1", "rax": "619", "eax": "19", "fcm1": true, "dbg": true, "cmd": {"22": "DB32"}, "freq": 0.25,
   "signals": [
     {"id": "BMW_AXLE_FRONT_ACTUAL_TORQUE",   "path": "Tires", "fmt": {           "len": 16, "max": 8000, "min": -8000, "div": 4, "sign": true, "unit": "newtonMeters" }, "name": "Front axle, actual torque"},
     {"id": "BMW_AXLE_FRONT_SETPOINT_TORQUE", "path": "Tires", "fmt": {"bix": 32, "len": 16, "max": 8000, "min": -8000, "div": 4, "sign": true, "unit": "newtonMeters" }, "name": "Front axle, setpoint torque"}
@@ -148,16 +156,16 @@
   "signals": [
     {"id": "BMW_ODO_2", "path": "Trips", "fmt": { "len": 32, "max": 1000000, "unit": "kilometers" }, "name": "Odometer variant"}
   ]},
-{ "hdr": "6F1", "rax": "656", "eax": "56", "fcm1": true, "dbg": true, "cmd": {"22": "DCDD"}, "freq": 30,
+{ "hdr": "6F1", "rax": "656", "eax": "56", "fcm1": true, "dbg": true, "cmd": {"22": "DCDD"}, "freq": 5,
   "signals": [
-    {"id": "BMW_DOOR_DRIVER",         "path": "Doors", "fmt": {           "len": 8, "max": 255, "unit": "scalar" }, "name": "Driver door open"},
-    {"id": "BMW_DOOR_PASSENGER",      "path": "Doors", "fmt": {"bix": 8,  "len": 8, "max": 255, "unit": "scalar" }, "name": "Passenger door open"},
-    {"id": "BMW_DOOR_DRIVER_REAR",    "path": "Doors", "fmt": {"bix": 16, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear driver door open"},
-    {"id": "BMW_DOOR_PASSENGER_REAR", "path": "Doors", "fmt": {"bix": 24, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear passenger door open"},
-    {"id": "BMW_HOOD",                "path": "Doors", "fmt": {"bix": 32, "len": 8, "max": 255, "unit": "scalar" }, "name": "Hood open"},
-    {"id": "BMW_TRUNK",               "path": "Doors", "fmt": {"bix": 40, "len": 8, "max": 255, "unit": "scalar" }, "name": "Trunk open"},
-    {"id": "BMW_REAR_WINDOW",         "path": "Doors", "fmt": {"bix": 48, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear window open"},
-    {"id": "BMW_CENTRAL_LOCK",        "path": "Doors", "fmt": {"bix": 56, "len": 8, "max": 255, "unit": "scalar" }, "name": "Locked",                   "description": "Overall lock state of the vehicle"}
+    {"id": "BMW_DOOR_DRIVER",         "path": "Doors",   "fmt": {           "len": 8, "max": 255, "unit": "scalar" }, "name": "Driver door open"},
+    {"id": "BMW_DOOR_PASSENGER",      "path": "Doors",   "fmt": {"bix": 8,  "len": 8, "max": 255, "unit": "scalar" }, "name": "Passenger door open"},
+    {"id": "BMW_DOOR_DRIVER_REAR",    "path": "Doors",   "fmt": {"bix": 16, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear driver door open"},
+    {"id": "BMW_DOOR_PASSENGER_REAR", "path": "Doors",   "fmt": {"bix": 24, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear passenger door open"},
+    {"id": "BMW_HOOD",                "path": "Doors",   "fmt": {"bix": 32, "len": 8, "max": 255, "unit": "scalar" }, "name": "Hood open"},
+    {"id": "BMW_TRUNK",               "path": "Doors",   "fmt": {"bix": 40, "len": 8, "max": 255, "unit": "scalar" }, "name": "Trunk open"},
+    {"id": "BMW_REAR_WINDOW",         "path": "Windows", "fmt": {"bix": 48, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear window open"},
+    {"id": "BMW_CENTRAL_LOCK",        "path": "Doors",   "fmt": {"bix": 56, "len": 8, "max": 255, "unit": "scalar" }, "name": "Locked",                   "description": "Overall lock state of the vehicle"}
   ]},
 { "hdr": "6F1", "rax": "660", "eax": "60", "fcm1": true, "dbg": true, "cmd": {"22": "420C"}, "freq": 5,
   "signals": [
