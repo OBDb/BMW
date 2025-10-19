@@ -1,4 +1,19 @@
 { "commands": [
+{ "hdr": "6F1", "eax": "60", "fcm1": true, "dbg": true, "cmd": {"22": "420C"}, "freq": 5,
+  "signals": [
+    {"id": "BMW_RANGE_ECO",  "path": "Trips", "fmt": {           "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining in economy mode", "suggestedMetric": "electricRange"},
+    {"id": "BMW_RANGE_COMF", "path": "Trips", "fmt": {"bix": 16, "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining in comfort mode", "suggestedMetric": "electricRange"},
+    {"id": "BMW_RANGE",      "path": "Trips", "fmt": {"bix": 32, "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining",                 "suggestedMetric": "electricRange"}
+  ]},
+{ "hdr": "6F1", "eax": "63", "fcm1": true, "dbg": true, "cmd": {"22": "D031"}, "freq": 1,
+  "signals": [
+    {"id": "BMW_GEAR_V2", "path": "Transmission", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Current gear"}
+  ]},
+{ "hdr": "6F1", "eax": "19", "fcm1": true, "dbg": true, "cmd": {"22": "DFE7"}, "freq": 1,
+  "signals": [
+    {"id": "BMW_VGT_CAL_ANGLE",   "path": "Engine", "fmt": {            "len": 16, "max": 1000,    "mul": 156.25, "div": 10000, "unit": "degrees"    }, "name": "Variable geometry turbocharger calibration angle"},
+    {"id": "BMW_OIL_CHANGE_DIST", "path": "Fluids", "fmt": {"bix": 304, "len": 32, "max": 1000000,                              "unit": "kilometers" }, "name": "Distance since last oil change"}
+  ]},
 { "hdr": "6F1", "rax": "607", "eax": "07", "fcm1": true, "dbg": true, "cmd": {"22": "6335"}, "freq": 3600,
   "signals": [
     {"id": "BMW_HVBAT_SOH", "path": "Battery", "fmt": {"bix": 24, "len": 8, "max": 100, "unit": "percent" }, "name": "HV battery health", "suggestedMetric": "stateOfHealth"}
@@ -95,7 +110,7 @@
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA23"}, "freq": 15,
   "signals": [
     {"id": "BMW_ODO_LOWRES", "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "Odometer, low resolution", "suggestedMetric": "odometer"},
-    {"id": "BMW_ODO",        "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "[EGS] mileage/odometer"}
+    {"id": "BMW_ODO",        "path": "Trips", "fmt": { "len": 32, "max": 1000000, "mul": 8, "unit": "kilometers" }, "name": "[egs] mileage/odometer"}
   ]},
 { "hdr": "6F1", "rax": "618", "eax": "18", "fcm1": true, "dbg": true, "cmd": {"22": "DA25"}, "freq": 30,
   "signals": [
@@ -132,11 +147,6 @@
     {"id": "BMW_AXLE_FRONT_ACTUAL_TORQUE",   "path": "Tires", "fmt": {           "len": 16, "max": 8000, "min": -8000, "div": 4, "sign": true, "unit": "newtonMeters" }, "name": "Front axle, actual torque"},
     {"id": "BMW_AXLE_FRONT_SETPOINT_TORQUE", "path": "Tires", "fmt": {"bix": 32, "len": 16, "max": 8000, "min": -8000, "div": 4, "sign": true, "unit": "newtonMeters" }, "name": "Front axle, setpoint torque"}
   ]},
-{ "hdr": "6F1", "rax": "619", "eax": "19", "fcm1": true, "dbg": true, "cmd": {"22": "DFE7"}, "freq": 1,
-  "signals": [
-    {"id": "BMW_VGT_CAL_ANGLE",   "path": "Engine", "fmt": {            "len": 16, "max": 1000,    "mul": 156.25, "div": 10000, "unit": "degrees"    }, "name": "Variable geometry turbocharger calibration angle"},
-    {"id": "BMW_OIL_CHANGE_DIST", "path": "Fluids", "fmt": {"bix": 304, "len": 32, "max": 1000000,                              "unit": "kilometers" }, "name": "Distance since last oil change"}
-  ]},
 { "hdr": "6F1", "rax": "61A", "eax": "1A", "fcm1": true, "dbg": true, "cmd": {"22": "DE00"}, "freq": 5,
   "signals": [
     {"id": "BMW_HVBAT_HVPM_SOC",     "path": "Battery", "fmt": {           "len": 16, "max": 100, "div": 10, "unit": "percent" }, "name": "State of charge (hvpm)",  "description": "Battery level reading from the high voltage power module"},
@@ -167,12 +177,6 @@
     {"id": "BMW_REAR_WINDOW",         "path": "Windows", "fmt": {"bix": 48, "len": 8, "max": 255, "unit": "scalar" }, "name": "Rear window open"},
     {"id": "BMW_CENTRAL_LOCK",        "path": "Doors",   "fmt": {"bix": 56, "len": 8, "max": 255, "unit": "scalar" }, "name": "Locked",                   "description": "Overall lock state of the vehicle"}
   ]},
-{ "hdr": "6F1", "rax": "660", "eax": "60", "fcm1": true, "dbg": true, "cmd": {"22": "420C"}, "freq": 5,
-  "signals": [
-    {"id": "BMW_RANGE_ECO",  "path": "Trips", "fmt": {           "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining in economy mode", "suggestedMetric": "electricRange"},
-    {"id": "BMW_RANGE_COMF", "path": "Trips", "fmt": {"bix": 16, "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining in comfort mode", "suggestedMetric": "electricRange"},
-    {"id": "BMW_RANGE",      "path": "Trips", "fmt": {"bix": 32, "len": 16, "max": 65535, "unit": "kilometers" }, "name": "Estimated range remaining",                 "suggestedMetric": "electricRange"}
-  ]},
 { "hdr": "6F1", "rax": "660", "eax": "60", "fcm1": true, "dbg": true, "cmd": {"22": "D107"}, "freq": 0.25,
   "signals": [
     {"id": "BMW_VSS", "path": "Movement", "fmt": { "len": 16, "max": 255, "div": 10, "unit": "kilometersPerHour" }, "name": "Vehicle speed", "suggestedMetric": "speed", "description": "Speedometer vehicle speed."}
@@ -194,10 +198,6 @@
 { "hdr": "6F1", "rax": "660", "eax": "60", "fcm1": true, "dbg": true, "cmd": {"22": "D112"}, "freq": 5,
   "signals": [
     {"id": "BMW_AAT", "path": "Climate", "fmt": { "len": 8, "max": 87.5, "min": -40, "div": 2, "add": -40, "unit": "celsius" }, "name": "Ambient air temperature"}
-  ]},
-{ "hdr": "6F1", "rax": "663", "eax": "63", "fcm1": true, "dbg": true, "cmd": {"22": "D031"}, "freq": 1,
-  "signals": [
-    {"id": "BMW_GEAR_V2", "path": "Transmission", "fmt": { "len": 8, "max": 255, "unit": "scalar" }, "name": "Current gear"}
   ]}
 ]
 }
